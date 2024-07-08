@@ -1,0 +1,191 @@
+let SessionLoad = 1
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
+let v:this_session=expand("<sfile>:p")
+silent only
+silent tabonly
+cd ~/Développement/Next/sogeco3
+if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
+  let s:wipebuf = bufnr('%')
+endif
+let s:shortmess_save = &shortmess
+if &shortmess =~ 'A'
+  set shortmess=aoOA
+else
+  set shortmess=aoO
+endif
+badd +0 src/middleware.ts
+badd +0 src/app/(user)/voyages/page.tsx
+badd +10 tsconfig.json
+badd +0 src/app/(user)/commandes/page.tsx
+badd +116 src/app/(user)/commandes/nouvelle/page.tsx
+badd +0 src/app/(user)/commandes/detail/page.tsx
+badd +0 src/app/(user)/commandes/detail/\[id]/page.tsx
+argglobal
+%argdel
+$argadd src/middleware.ts
+set stal=2
+tabnew +setlocal\ bufhidden=wipe
+tabnew +setlocal\ bufhidden=wipe
+tabnew +setlocal\ bufhidden=wipe
+tabrewind
+edit src/middleware.ts
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 1 - ((0 * winheight(0) + 20) / 41)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 1
+normal! 0
+tabnext
+edit src/app/(user)/voyages/page.tsx
+argglobal
+balt src/middleware.ts
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+40,53fold
+56,100fold
+114,130fold
+133,134fold
+137,140fold
+143,144fold
+147,148fold
+151,165fold
+168,174fold
+178,204fold
+207,231fold
+177,232fold
+235,236fold
+239,240fold
+243,331fold
+334,360fold
+363,383fold
+let &fdl = &fdl
+177
+normal! zo
+177
+normal! zc
+let s:l = 103 - ((67 * winheight(0) + 20) / 40)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 103
+normal! 05|
+tabnext
+edit src/app/(user)/commandes/page.tsx
+argglobal
+balt src/app/(user)/voyages/page.tsx
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+46,51fold
+54,57fold
+60,61fold
+64,66fold
+69,77fold
+80,86fold
+92,106fold
+109,124fold
+89,129fold
+132,133fold
+136,274fold
+277,284fold
+287,331fold
+334,365fold
+let &fdl = &fdl
+89
+normal! zo
+89
+normal! zc
+let s:l = 388 - ((253 * winheight(0) + 20) / 40)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 388
+normal! 0
+tabnext
+edit src/app/(user)/commandes/detail/\[id]/page.tsx
+argglobal
+balt src/app/(user)/commandes/page.tsx
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+98,111fold
+114,122fold
+125,137fold
+140,154fold
+157,168fold
+171,179fold
+182,185fold
+188,201fold
+204,218fold
+221,223fold
+226,245fold
+248,251fold
+254,272fold
+275,277fold
+280,281fold
+287,302fold
+307,320fold
+321,334fold
+305,338fold
+let &fdl = &fdl
+305
+normal! zo
+307
+normal! zo
+321
+normal! zo
+305
+normal! zc
+let s:l = 460 - ((18 * winheight(0) + 20) / 40)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 460
+normal! 021|
+tabnext 4
+set stal=1
+if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
+  silent exe 'bwipe ' . s:wipebuf
+endif
+unlet! s:wipebuf
+set winheight=1 winwidth=20
+let &shortmess = s:shortmess_save
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if filereadable(s:sx)
+  exe "source " . fnameescape(s:sx)
+endif
+let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
+doautoall SessionLoadPost
+unlet SessionLoad
+" vim: set ft=vim :
